@@ -7,17 +7,20 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        bannerList:[], //轮播图数据
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     async onLoad(options) {
-        const res = await request("http://127.0.0.1:3000/banner", {
+        const bannerListData = await request("http://127.0.0.1:3000/banner", {
             type: 2
         })
-        console.log("res: ",res);
+        this.setData({
+            bannerList:bannerListData
+        })
+
     },
 
     /**
