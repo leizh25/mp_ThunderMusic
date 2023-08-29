@@ -1,3 +1,5 @@
+import request from "../../utils/request"
+
 // pages/index/index.js
 Page({
 
@@ -11,19 +13,11 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad(options) {
-        wx.request({
-            url: 'http://127.0.0.1:3000/banner',
-            data: {
-                type: 2
-            },
-            success: res => {
-                console.log("请求成功 ",res);
-            },
-            fail:err=>{
-                console.log("请求失败 ",err);
-            }
+    async onLoad(options) {
+        const res = await request("http://127.0.0.1:3000/banner", {
+            type: 2
         })
+        console.log("res: ",res);
     },
 
     /**
