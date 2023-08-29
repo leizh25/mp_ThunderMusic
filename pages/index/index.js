@@ -7,20 +7,28 @@ Page({
      * 页面的初始数据
      */
     data: {
-        bannerList:[], //轮播图数据
+        bannerList: [], //轮播图数据
+        recommendList: [], //推荐歌单
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     async onLoad(options) {
-        const bannerListData = await request("http://127.0.0.1:3000/banner", {
+        const bannerListData = await request("/banner", {
             type: 2
         })
         this.setData({
-            bannerList:bannerListData
+            bannerList: bannerListData
         })
 
+        //获取推荐歌单
+        const recommendList = await request("/personalized", {
+            limit: 10
+        })
+        this.setData({
+            recommendList:recommendList.result
+        })
     },
 
     /**

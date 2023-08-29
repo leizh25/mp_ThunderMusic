@@ -44,33 +44,10 @@
 
     <!--    内容区-->
     <scroll-view class="recommendScroll" scroll-x enable-flex >
-        <view class="scrollItem">
-            <image src="/static/images/nvsheng.jpg"></image>
-            <text>嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</text>
+        <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id">
+            <image src="{{item.picUrl}}"></image>
+            <text>{{item.name}}</text>
         </view>
-        <view class="scrollItem">
-            <image src="/static/images/nvsheng.jpg"></image>
-            <text>嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/nvsheng.jpg"></image>
-            <text>嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/nvsheng.jpg"></image>
-            <text>嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/nvsheng.jpg"></image>
-            <text>嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/nvsheng.jpg"></image>
-            <text>嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</text>
-        </view>
-        <view class="scrollItem">
-            <image src="/static/images/nvsheng.jpg"></image>
-            <text>嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</text>
-        </view>
+        
     </scroll-view>
 </view>
