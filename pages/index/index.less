@@ -14,6 +14,7 @@
     display: flex;
     justify-content: space-between;
     padding: 20rpx;
+
     .navItem {
         display: flex;
         flex-direction: column;
@@ -79,6 +80,38 @@
 }
 
 // 排行榜
-.topList{
+.topList {
     padding: 20rpx;
+
+    .topListSwiper {
+        height: 450rpx;
+        .swiperItem {
+            width: 96%;
+            background-color: #fbfbfb;
+            .title{
+                font-size: 30rpx;
+                line-height: 80rpx;
+            }
+            .musicItem{
+                // 当一个元素设置为flex,其子元素会自动成为block
+                display: flex;
+                margin-bottom: 20rpx;
+                image{
+                    width: 100rpx;
+                    height: 100rpx;
+                    border-radius: 6rpx;
+                }
+                .count{
+                    width: 100rpx;
+                    height: 100rpx;
+                    text-align: center;
+                    line-height: 100rpx;
+                }
+                .musicName{
+                    height: 100rpx;
+                    line-height: 100rpx;
+                }
+            }
+        }
+    }
 }

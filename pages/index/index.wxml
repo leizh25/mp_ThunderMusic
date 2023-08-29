@@ -34,7 +34,7 @@
     <!--    推荐歌曲区域-->
     <view class="recommendContainer">
         <!-- 头部区 -->
-       <NavHeader title="推荐歌曲" nav="为你精心推荐"></NavHeader>
+        <NavHeader title="推荐歌曲" nav="为你精心推荐"></NavHeader>
 
         <!--    内容区-->
         <scroll-view class="recommendScroll" scroll-x enable-flex>
@@ -49,9 +49,70 @@
     <!-- 排行榜 -->
     <view class="topList">
         <!-- 头部区域 -->
-       <NavHeader title="排行榜" nav="热歌风向标"></NavHeader>
-
+        <NavHeader title="排行榜" nav="热歌风向标"></NavHeader>
         <!-- 内容区域 -->
+        <swiper class="topListSwiper" next-margin="50rpx">
+            <swiper-item>
+                <view class="swiperItem">
+                    <view class="title">云音乐热播榜</view>
+                    <view class="musicItem">
+                        <image src="/static/images/nvsheng.jpg" mode="" />
+                        <text class="count">1</text>
+                        <text class="musicName">光辉岁月</text>
+                    </view>
+                    <view class="musicItem">
+                        <image src="/static/images/nvsheng.jpg" mode="" />
+                        <text class="count">2</text>
+                        <text class="musicName">光辉岁月</text>
+                    </view>
+                    <view class="musicItem">
+                        <image src="/static/images/nvsheng.jpg" mode="" />
+                        <text class="count">3</text>
+                        <text class="musicName">光辉岁月</text>
+                    </view>
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view class="swiperItem">
+                    <view class="title">云音乐热播榜</view>
+                    <view class="musicItem">
+                        <image src="/static/images/nvsheng.jpg" mode="" />
+                        <text class="count">1</text>
+                        <text class="musicName">光辉岁月</text>
+                    </view>
+                    <view class="musicItem">
+                        <image src="/static/images/nvsheng.jpg" mode="" />
+                        <text class="count">2</text>
+                        <text class="musicName">光辉岁月</text>
+                    </view>
+                    <view class="musicItem">
+                        <image src="/static/images/nvsheng.jpg" mode="" />
+                        <text class="count">3</text>
+                        <text class="musicName">光辉岁月</text>
+                    </view>
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view class="swiperItem">
+                    <view class="title">云音乐热播榜</view>
+                    <view class="musicItem">
+                        <image src="/static/images/nvsheng.jpg" mode="" />
+                        <text class="count">1</text>
+                        <text class="musicName">光辉岁月</text>
+                    </view>
+                    <view class="musicItem">
+                        <image src="/static/images/nvsheng.jpg" mode="" />
+                        <text class="count">2</text>
+                        <text class="musicName">光辉岁月</text>
+                    </view>
+                    <view class="musicItem">
+                        <image src="/static/images/nvsheng.jpg" mode="" />
+                        <text class="count">3</text>
+                        <text class="musicName">光辉岁月</text>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
     </view>
 
 </view>
