@@ -19,8 +19,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        phone:"",
-        password:""
+        phone: "",
+        password: ""
     },
 
     /**
@@ -30,12 +30,53 @@ Page({
 
     },
     //表单项内容发生改变的回调
-    handleInput(e){
+    handleInput(e) {
         // let type = e.currentTarget.id   //id传值   取值: phone || password
-        let type = e.currentTarget.dataset.type
-        console.log('type: ', type);
+        let type = e.currentTarget.dataset.type //data-key=value传值 
         this.setData({
-            [type]:e.detail.value
+            [type]: e.detail.value
+        })
+    },
+    //登录回调
+    login() {
+        //收集表单项数据
+        let {
+            phone,
+            password
+        } = this.data
+        //2.前端验证
+        /* 
+            手机号验证
+            1.内容为空
+            2.手机号格式不正确
+            3.手机号格式正确,验证通过
+        */
+        if (!phone) {
+            wx.showToast({
+                title: '手机号不能为空',
+                icon: "none"
+            })
+            return
+        }
+        //定义正则表达式
+        let phoneReg = /^1(3|4|5|6|7|8|9)\d{9}$/
+        if (!phoneReg.test(phone)) {
+            wx.showToast({
+                title: '手机号格式错误',
+                icon: "none"
+            })
+            return
+        }
+        if(!password){
+            wx.showToast({
+                title: '密码不能为空',
+                icon: "none"
+            })
+            return
+        }
+        wx.showToast({
+            title: '前端验证通过',
+            icon: "none"
         })
     },
 
