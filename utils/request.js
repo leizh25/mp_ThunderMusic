@@ -26,16 +26,16 @@ import config from "./config"
 export default (url, data = {}, method = "GET") => {
     return new Promise((resolve, reject) => {
         //1.new Promise的初始化promise实例状态为pending
-        console.log("请求: ",url);
+        console.log("请求: ",config.host + url);
         wx.request({
-            url: config.host + url,
+            url: config.host + url, // + "?proxy=http://azzz.fun:20171"
             data,
             success: res => {
-                console.log("成功");
+                console.log("成功✅");
                 resolve(res.data) //修改Promise的状态为成功状态
             },
             fail: err => {
-                console.log("失败 ");
+                console.log("失败❌");
                 reject(err) //修改Promise的状态为失败状态
             }
         })

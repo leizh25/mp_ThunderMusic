@@ -9,6 +9,8 @@ Page({
     data: {
         bannerList: [], //轮播图数据
         recommendList: [], //推荐歌单
+        topList: [], //排行榜数据,
+        // playList: [], //歌单详情
     },
 
     /**
@@ -27,8 +29,46 @@ Page({
             limit: 10
         })
         this.setData({
-            recommendList:recommendList.result
+            recommendList: recommendList.result
         })
+
+        //获取排行榜数据
+        request("/toplist").then(res => {
+            console.log("res.list.slice(0, 5): ", res.list.slice(0, 5));
+            return (res.list.slice(0, 5))
+        }).then(res => {
+            let promiseAll = []
+            res.forEach(item => {
+                promiseAll.push(request("/playlist/detail", {
+                    id: item.id
+                }).then(list => {
+                    return list.playlist
+                }))
+            })
+            return Promise.all(promiseAll)
+        }).then(list => {
+            // console.log('list: ', list);
+            let topList = []
+            list.forEach(item => {
+                let topListItem = {
+                    name: item.name,
+                    tracks: item.tracks.slice(0, 3)
+                }
+                this.setData({
+                    topList: this.data.topList.concat(topListItem)
+                })
+
+            })
+
+        }).catch(e => {
+            console.log(e);
+        })
+        /**
+         * 需求分析:
+         *  1.需要根据idx的值获取对应的数据
+         *  2.idx的取值范围是0-20, 我们需要0-4
+         *  3.发送5次请求
+         */
     },
 
     /**
