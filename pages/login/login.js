@@ -13,6 +13,7 @@
  *      密码不正确返回前端提示密码不正确
  *      密码正确返回前端数据,提示用户登录成功(会携带用户的相关信息)
  */
+import request from "../../utils/request"
 Page({
 
     /**
@@ -38,7 +39,7 @@ Page({
         })
     },
     //登录回调
-    login() {
+    async login() {
         //收集表单项数据
         let {
             phone,
@@ -67,17 +68,42 @@ Page({
             })
             return
         }
-        if(!password){
+        if (!password) {
             wx.showToast({
                 title: '密码不能为空',
                 icon: "none"
             })
             return
         }
-        wx.showToast({
-            title: '前端验证通过',
-            icon: "none"
+
+        //后端验证
+        let res = await request("/login/cellphone", {
+            phone,
+            password
         })
+        console.log('res: ', res);
+        if (res.code == 200) {
+            wx.showToast({
+                title: '登录成功',
+            })
+        } else if (res.code == 400) {
+            wx.showToast({
+                title: '手机号错误',
+                icon: "none"
+            })
+        } else if (res.code == 502) {
+            wx.showToast({
+                title: '密码错误',
+                icon: "none"
+            })
+        } else {
+            wx.showToast({
+                title: res.message,
+                icon: "none"
+            })
+        }
+
+
     },
 
     /**
