@@ -15,15 +15,24 @@ Page({
      */
     onLoad(options) {
         this.getVideoGroupListData()
+        
     },
     //获取导航数据,
     async getVideoGroupListData() {
         let videoGroupListData = await request("/video/group/list")
-        console.log(videoGroupListData.data[0].id)
         this.setData({
             videoGroupList: videoGroupListData.data.slice(0, 14),
             navId: videoGroupListData.data[0].id,
         })
+        //获取视频列表数据
+        this.getVideoList(this.data.navId)
+    },
+    //获取视频列表数据
+    async getVideoList(navId){
+        let videoListData = await request("/video/group",{
+            id:navId
+        })
+        console.log('videoListData: ', videoListData);
     },
     //点击切换导航的回调
     changeNav(e) {

@@ -79,7 +79,8 @@ Page({
         //后端验证
         let res = await request("/login/cellphone", {
             phone,
-            password
+            password,
+            isLogin:true
         })
         console.log('res: ', res);
         if (res.code == 200) {
@@ -89,7 +90,7 @@ Page({
             })
             //将用户的信息存储在本地
             wx.setStorageSync('userInfo', JSON.stringify(res.profile))
-
+            wx.setStorageSync('cookie', res.cookie)
             //跳转至个人中心personal
             wx.reLaunch({
               url: '/pages/personal/personal',
