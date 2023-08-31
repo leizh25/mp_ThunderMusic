@@ -83,9 +83,18 @@ Page({
         })
         console.log('res: ', res);
         if (res.code == 200) {
+            //登录成功
             wx.showToast({
                 title: '登录成功',
             })
+            //将用户的信息存储在本地
+            WSHwx.setStorageSync('userInfo', JSON.stringify(res.profile))
+
+            //跳转至个人中心personal
+            wx.reLaunch({
+              url: '/pages/personal/personal',
+            })
+
         } else if (res.code == 400) {
             wx.showToast({
                 title: '手机号错误',

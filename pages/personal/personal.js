@@ -8,15 +8,23 @@ Page({
      * 页面的初始数据
      */
     data: {
-        coverTransform:"translateY(0)",
-        coverTransition:""
+        coverTransform: "translateY(0)",
+        coverTransition: "",
+        userInfo: {}
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        //读取用户的基本信息
+        let userInfo = wx.getStorageSync('userInfo')
+        if (userInfo) {
+            //更新userInfo的状态
+            this.setData({
+                userInfo:JSON.parse(userInfo)
+            })
+        }
     },
     handleTouchStart(e) {
         //获取手指的起始坐标
@@ -28,17 +36,17 @@ Page({
         moveDistance = moveY - startY
         // console.log('moveDistance: ', moveDistance);
         //动态更新coverTransform的状态值
-        if(moveDistance <= 0) return
+        if (moveDistance <= 0) return
         if (moveDistance >= 80) moveDistance = 80
         this.setData({
-            coverTransform:`translateY(${moveDistance}rpx)`,
-            coverTransition:""
+            coverTransform: `translateY(${moveDistance}rpx)`,
+            coverTransition: ""
         })
     },
     handleTouchEnd(e) {
         this.setData({
-            coverTransform:`translateY(0)`,
-            coverTransition:`transform .5s linear`
+            coverTransform: `translateY(0)`,
+            coverTransition: `transform .5s linear`
         })
     },
 
