@@ -88,7 +88,7 @@ Page({
                 title: '登录成功',
             })
             //将用户的信息存储在本地
-            WSHwx.setStorageSync('userInfo', JSON.stringify(res.profile))
+            wx.setStorageSync('userInfo', JSON.stringify(res.profile))
 
             //跳转至个人中心personal
             wx.reLaunch({

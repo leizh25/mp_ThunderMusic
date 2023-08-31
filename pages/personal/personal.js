@@ -1,3 +1,5 @@
+import request from "../../utils/request"
+
 // pages/personal/personal.js
 let startY = 0 //手指起始的坐标
 let moveY = 0 //手指移动的坐标
@@ -10,7 +12,8 @@ Page({
     data: {
         coverTransform: "translateY(0)",
         coverTransition: "",
-        userInfo: {}
+        userInfo: {},
+        recentPlayList: []
     },
 
     /**
@@ -22,9 +25,24 @@ Page({
         if (userInfo) {
             //更新userInfo的状态
             this.setData({
-                userInfo:JSON.parse(userInfo)
+                userInfo: JSON.parse(userInfo)
             })
         }
+        //获取用户的播放记录
+        this.getUserRecentPlayList()
+
+    },
+    //获取用户播放记录
+    async getUserRecentPlayList() {
+        let recentPlayListData = await request("/user/record", {
+            uid: this.data.userInfo.userId,
+            type: 0
+        })
+        let index = 0
+        // let recentPlayList = recentPlayListData.allData.splice(0, 10).map(item => item.id = index++)
+        this.setData({
+            recentPlayList: recentPlayListData.allData.splice(0, 10)
+        })
     },
     handleTouchStart(e) {
         //获取手指的起始坐标
