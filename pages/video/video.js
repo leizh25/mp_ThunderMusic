@@ -7,7 +7,8 @@ Page({
      */
     data: {
         videoGroupList: [],
-        navId: ""
+        navId: "",
+        videoList: []
     },
 
     /**
@@ -15,7 +16,7 @@ Page({
      */
     onLoad(options) {
         this.getVideoGroupListData()
-        
+
     },
     //获取导航数据,
     async getVideoGroupListData() {
@@ -28,11 +29,32 @@ Page({
         this.getVideoList(this.data.navId)
     },
     //获取视频列表数据
-    async getVideoList(navId){
-        let videoListData = await request("/video/group",{
-            id:navId
+    async getVideoList(navId) {
+        let videoDetails = await request('/video/group', {
+            id: navId
+        });
+        let videoInfoList = [];
+        videoDetails.datas.forEach(i => {
+            videoInfoList.push({
+                id: i.data.vid,
+                title: i.data.title,
+                creator: i.data.creator,
+                commentCount: i.data.commentCount,
+                praisedCount: i.data.praisedCount,
+                coverUrl: i.data.couverUrl,
+                videoUrl: ""
+            })
         })
-        console.log('videoListData: ', videoListData);
+        for (const i of videoInfoList) {
+            let result = await request('/video/url', {
+                id: i.id
+            }).then(r => {
+                i.videoUrl = r.urls[0].url
+            })
+        }
+        this.setData({
+            videoList: videoInfoList
+        })
     },
     //点击切换导航的回调
     changeNav(e) {
