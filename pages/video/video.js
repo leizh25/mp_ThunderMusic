@@ -33,6 +33,7 @@ Page({
         let videoDetails = await request('/video/group', {
             id: navId
         });
+
         let videoInfoList = [];
         videoDetails.datas.forEach(i => {
             videoInfoList.push({
@@ -55,13 +56,23 @@ Page({
         this.setData({
             videoList: videoInfoList
         })
+        //关闭消息提示框
+        wx.hideLoading()
     },
     //点击切换导航的回调
     changeNav(e) {
         let navId = e.currentTarget.id
         this.setData({
-            navId: navId * 1 //转数字类型
+            navId: navId * 1, //转数字类型
+            videoList: []
         })
+        //显示正在加载
+        wx.showLoading({
+            title: '正在加载',
+            mask: true
+        })
+        //动态获取当前导航对应的视频数据
+        this.getVideoList(this.data.navId)
     },
 
     /**
