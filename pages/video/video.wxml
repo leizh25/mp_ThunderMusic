@@ -14,7 +14,7 @@
     <!-- 视频列表区 -->
     <scroll-view scroll-y class="videoScroll">
         <view class="videoItem" wx:for="{{videoList}}" wx:key="index">
-            <video src="{{item.videoUrl}}" bindplay="handlePlay" id="{{item.id}}"/>
+            <video src="{{item.videoUrl}}" bindplay="handlePlay" id="{{item.id}}" object-fit="cover"/>
             <view class="content">{{item.title}}</view>
             <view class="footer">
                 <image src="{{item.creator.avatarUrl}}" mode="" class="avatar" />
