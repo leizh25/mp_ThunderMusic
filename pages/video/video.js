@@ -6,9 +6,12 @@ Page({
      * 页面的初始数据
      */
     data: {
-        videoGroupList: [],
-        navId: "",
-        videoList: []
+        videoGroupList: [], //导航标签数据
+        navId: "", //导航的标识
+        videoList: [], //视频列表数据
+        isTriggered: false, //标识下拉刷新是否被触发
+        offset: 0, //视频分页
+
     },
 
     /**
@@ -29,9 +32,10 @@ Page({
         this.getVideoList(this.data.navId)
     },
     //获取视频列表数据
-    async getVideoList(navId) {
+    async getVideoList(navId, offset = this.data.offset) {
         let videoDetails = await request('/video/group', {
-            id: navId
+            id: navId,
+            offset
         });
 
         let videoInfoList = [];
@@ -54,7 +58,9 @@ Page({
             })
         }
         this.setData({
-            videoList: videoInfoList
+            videoList: this.data.videoList.concat(videoInfoList),
+            //关闭下拉刷新
+            isTriggered: false
         })
         //关闭消息提示框
         wx.hideLoading()
@@ -95,6 +101,27 @@ Page({
         this.videoContext = wx.createVideoContext(vid)
         // this.videoContext.stop()
 
+    },
+    //自定义下拉刷新的回调 : scroll-view
+    handleRefresher() {
+        // console.log("scroll-view下拉刷新");
+        // 再次发请求,获取最新的视频列表数据
+        this.setData({
+            videoList:[]
+        })
+        this.getVideoList(this.data.navId)
+    },
+    //自定义上拉触底的回调 scroll-view
+    handleToLower() {
+        // console.log("scroll-view上拉触底");
+        //数据分页: 1.后端分页  2.前端分页
+        console.log("发情请求 || 在前端截取最新的数据 追加到视频列表的后方");
+        let tempOffset = this.data.offset
+        this.getVideoList(this.data.navId, tempOffset + 1).then(() => {
+            this.setData({
+                offset: tempOffset + 1
+            })
+        })
     },
 
     /**
