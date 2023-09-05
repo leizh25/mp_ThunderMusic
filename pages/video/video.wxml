@@ -29,7 +29,7 @@
                         <text class="count">{{item.commentCount}}</text>
                     </text>
                     <button open-type="share" class="item btn">
-                        <text class="iconfont icon-genduo"></text>
+                        <text class="iconfont icon-gengduo"></text>
                     </button>
                 </view>
             </view>
