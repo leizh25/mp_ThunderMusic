@@ -15,115 +15,13 @@
         </view>
         <!-- 内容区 -->
         <scroll-view scroll-y class="listScroll">
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
+            <view class="scrollItem" wx:for="{{recommendList}}" wx:key="id">
+                <image src="{{item.al.picUrl}}" mode="" />
                 <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
-                </view>
-                <text class="iconfont icon-gengduo"></text>
-            </view>
-            <view class="scrollItem">
-                <image src="/static/images/nvsheng.jpg" mode=""/>
-                <view class="musicInfo">
-                    <text class="musicName">七秒钟的记忆</text>
-                    <text class="author">哈哈哈</text>
+                    <text class="musicName">{{item.name}}</text>
+                    <text class="author">
+                        <text wx:for="{{item.ar}}" id="id" wx:for-item="artist" wx:for-index="i">{{artist.name + (item.ar.length == 1 ? "" : (i+1 == item.ar.length ? "" : "、"))}}</text>
+                    </text>
                 </view>
                 <text class="iconfont icon-gengduo"></text>
             </view>
