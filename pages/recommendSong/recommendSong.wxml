@@ -3,8 +3,8 @@
     <view class="header">
         <image src="/static/images/recommendSong/recommendSong.jpg" mode="" />
         <view class="date">
-            <text class="day">05 / </text>
-            <text class="month">09</text>
+            <text class="day">{{day}} / </text>
+            <text class="month">{{month}}</text>
         </view>
     </view>
 </view>
