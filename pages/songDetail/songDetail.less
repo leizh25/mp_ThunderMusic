@@ -54,5 +54,22 @@
             border-radius: 50%;
         }
     }
+    .discAnimation{
+        animation: disc 8s linear .5s infinite;
+        // animation: name duration timing-function delay iteration-count direction fill-mode;
+    }
+    /* 
+     @keyframes:设置动画帧
+     1)from to
+        -适用于简单的动画,只有起始帧和结束帧
+     2)百分比
+        -适用于复杂的动画,动画不止两帧
+    */
+    @keyframes disc {
+        from{}
+        to{
+            transform: rotate(360deg);
+        }
+    }
 
 }
