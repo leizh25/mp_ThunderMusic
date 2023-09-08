@@ -27,9 +27,11 @@
         transform: rotate(-30deg);
         transition: transform .5s;
     }
-    .needleRotate{
+
+    .needleRotate {
         transform: rotate(0);
     }
+
     //磁盘
     .discContainer {
         position: relative;
@@ -54,10 +56,12 @@
             border-radius: 50%;
         }
     }
-    .discAnimation{
+
+    .discAnimation {
         animation: disc 8s linear .5s infinite;
         // animation: name duration timing-function delay iteration-count direction fill-mode;
     }
+
     /* 
      @keyframes:设置动画帧
      1)from to
@@ -66,10 +70,35 @@
         -适用于复杂的动画,动画不止两帧
     */
     @keyframes disc {
-        from{}
-        to{
+        from {}
+
+        to {
             transform: rotate(360deg);
         }
+    }
+
+    //底部控制区域
+    .musicControl {
+        position: absolute;
+        bottom: 40rpx;
+        left: 0;
+        border-top: 1rpx solid #eee;
+        width: 100%;
+        display: flex;
+
+        text {
+            width: 20%;
+            height: 120rpx;
+            line-height: 120rpx;
+            text-align: center;
+            color: #fff;
+            font-size: 50rpx;
+
+            &.big {
+                font-size: 80rpx;
+            }
+        }
+
     }
 
 }

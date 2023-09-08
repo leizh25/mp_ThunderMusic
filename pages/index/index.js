@@ -34,7 +34,7 @@ Page({
 
         //获取排行榜数据
         request("/toplist").then(res => {
-            console.log("res.list.slice(0, 5): ", res.list.slice(0, 5));
+            // console.log("res.list.slice(0, 5): ", res.list.slice(0, 5));
             return (res.list.slice(0, 5))
         }).then(res => {
             let promiseAll = []
