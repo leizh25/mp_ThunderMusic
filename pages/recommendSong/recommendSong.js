@@ -42,7 +42,17 @@ Page({
     async getRecommendList() {
         let recommendListData = await request("/recommend/songs")
         this.setData({
-            recommendList:recommendListData.data.dailySongs
+            recommendList: recommendListData.data.dailySongs
+        })
+    },
+    //跳转至songDetail页面
+    toSongDetail(e) {
+        let song = e.currentTarget.dataset.song;
+        //路由跳转传参:query参数
+        wx.navigateTo({
+            //不能直接将song对象作为参数传递,长度过长会被截取掉
+            url: '/pages/songDetail/songDetail?musicId=' + song.id,
+
         })
     },
 
