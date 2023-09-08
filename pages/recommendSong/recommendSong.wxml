@@ -20,7 +20,7 @@
                 <view class="musicInfo">
                     <text class="musicName">{{item.name}}</text>
                     <text class="author">
-                        <text wx:for="{{item.ar}}" id="id" wx:for-item="artist" wx:for-index="i">{{artist.name + (item.ar.length == 1 ? "" : (i+1 == item.ar.length ? "" : "、"))}}</text>
+                        <text wx:for="{{item.ar}}" id="id" wx:for-item="artist" wx:for-index="i" wx:key="id">{{artist.name + (item.ar.length == 1 ? "" : (i+1 == item.ar.length ? "" : "、"))}}</text>
                     </text>
                 </view>
                 <text class="iconfont icon-gengduo"></text>
