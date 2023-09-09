@@ -1,5 +1,6 @@
 // pages/songDetail/songDetail.js
 import request from "../../utils/request"
+import PubSub from "pubsub-js"
 //获取全局的实例
 let appInstance = getApp()
 Page({
