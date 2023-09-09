@@ -1,5 +1,7 @@
 // pages/songDetail/songDetail.js
 import request from "../../utils/request"
+//获取全局的实例
+let appInstance = getApp()
 Page({
 
     /**
@@ -29,12 +31,21 @@ Page({
         解决方案:
             1. 控制音频的实例backgroundAudioManager 去监视音乐的播放 / 暂停
         */
+
+        //判断当前音乐是否在播放
+        if (appInstance.globalData.isMusicPlay == true && appInstance.globalData.musicId == musicId) {
+            //修改当前页面音乐播放状态为true
+            this.setData({
+                isPlay: true
+            })
+        }
         //创建控制音乐播放的实例对象
         this.backgroundAudioManager = wx.getBackgroundAudioManager()
         //监视音乐播放 / 暂停 / 停止
         this.backgroundAudioManager.onPlay(() => {
             //修改音乐是否播放的状态
             this.changePlayState(true)
+            appInstance.globalData.musicId = musicId
         })
         this.backgroundAudioManager.onPause(() => {
             //修改音乐是否播放的状态
@@ -52,6 +63,8 @@ Page({
         this.setData({
             isPlay
         })
+        //修改全局音乐播放的状态
+        appInstance.globalData.isMusicPlay = isPlay
     },
     //点击播放暂停的回调
     handleMusicPlay() {
