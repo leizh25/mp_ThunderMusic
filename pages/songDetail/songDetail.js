@@ -106,6 +106,12 @@ Page({
             this.backgroundAudioManager.pause()
         }
     },
+    //点击切歌的回调
+    handleSwitch(e){
+        //获取切歌的类型
+        let type = e.currentTarget.id
+        console.log('type: ', type);
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
