@@ -8,6 +8,7 @@ Page({
     data: {
         isPlay: false, //标识音乐是否播放
         song: {}, //歌曲详情对象
+        musicId: "", //音乐ID
     },
 
     /**
@@ -18,6 +19,9 @@ Page({
         //原生小程序中路由传参对参数的长度有限制,如果参数长度过长,会自动截取掉
         // console.log('options: ', options);
         let musicId = options.musicId
+        this.setData({
+            musicId
+        })
         // console.log('musicId: ', musicId);
         this.getMusicInfo(musicId)
 
@@ -28,6 +32,10 @@ Page({
         this.setData({
             isPlay
         })
+        let {
+            musicId
+        } = this.data
+        this.musicControl(isPlay, musicId)
     },
     //获取音乐详情的功能函数
     async getMusicInfo(ids) {
@@ -42,6 +50,24 @@ Page({
         wx.setNavigationBarTitle({
             title: this.data.song.name,
         })
+    },
+    //控制音乐播放 / 暂停的功能函数
+    async musicControl(isPlay, musicId) {
+        //创建控制音乐播放的实例对象
+        let backgroundAudioManager = wx.getBackgroundAudioManager()
+        if (isPlay) { //音乐播放
+            //获取音乐播放链接
+            let musicLinkData = await request("/song/url", {
+                id: musicId
+            })
+            let musicLink = musicLinkData.data[0].url
+
+            backgroundAudioManager.src = musicLink
+            backgroundAudioManager.title = this.data.song.name
+
+        } else { //暂停音乐
+            backgroundAudioManager.pause()
+        }
     },
 
     /**
