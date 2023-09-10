@@ -56,6 +56,7 @@ Page({
             //修改音乐是否播放的状态
             this.changePlayState(false)
         })
+        
 
     },
     //修改播放状态的功能函数
@@ -108,10 +109,19 @@ Page({
         }
     },
     //点击切歌的回调
-    handleSwitch(e){
+    handleSwitch(e) {
         //获取切歌的类型
         let type = e.currentTarget.id
-        console.log('type: ', type);
+        // console.log('type: ', type);
+        //订阅来自recommendSong页面发布的musicId消息
+        PubSub.subscribe("musicId",(msg,musicId)=>{
+            console.log('musicId: ', musicId);
+
+            //取消订阅
+            PubSub.unsubscribe("musicId")
+        })
+        //发布消息数据给recommendSong页面
+        PubSub.publish("switchType", type)
     },
 
     /**

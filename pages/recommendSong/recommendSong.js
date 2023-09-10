@@ -11,6 +11,7 @@ Page({
         day: "", //日
         month: "", //月
         recommendList: [], //推荐列表数据
+        index: 0, //点击音乐的下标
     },
 
     /**
@@ -38,6 +39,25 @@ Page({
         })
         //获取每日推荐数据
         this.getRecommendList()
+
+        //订阅来自songDetail页面发布的消息
+        PubSub.subscribe("switchType", (msg, type) => {
+            // console.log(msg, type);
+            let {
+                recommendList,
+                index
+            } = this.data
+            if (type == "pre") {
+                //上一首
+                index -= 1
+            } else {
+                //下一首
+                index += 1
+            }
+            let musicId = recommendList[index].id
+            //将音乐ID回传给songDetail页面
+            PubSub.publish("musicId",musicId)
+        })
     },
 
     //获取用户每日推荐的数据
@@ -49,7 +69,13 @@ Page({
     },
     //跳转至songDetail页面
     toSongDetail(e) {
-        let song = e.currentTarget.dataset.song;
+        let {
+            song,
+            index
+        } = e.currentTarget.dataset;
+        this.setData({
+            index
+        })
         //路由跳转传参:query参数
         wx.navigateTo({
             //不能直接将song对象作为参数传递,长度过长会被截取掉
