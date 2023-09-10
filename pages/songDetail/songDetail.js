@@ -16,6 +16,7 @@ Page({
         musicLink: "", //音乐链接
         currentTime: "00:00", //实时时间
         durationTime: "00:00", //总时长
+        currentWidth: 0, //实时进度条的宽度
     },
 
     /**
@@ -66,8 +67,10 @@ Page({
             console.log("实时时长", this.backgroundAudioManager.currentTime);
             //格式化实时播放时间
             let currentTime = moment(this.backgroundAudioManager.currentTime * 1000).format("mm:ss")
+            let currentWidth = this.backgroundAudioManager.currentTime / this.backgroundAudioManager.duration * 450
             this.setData({
-                currentTime
+                currentTime,
+                currentWidth
             })
         })
 
