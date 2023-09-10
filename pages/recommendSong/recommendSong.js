@@ -49,14 +49,20 @@ Page({
             } = this.data
             if (type == "pre") {
                 //上一首
+                (index == 0) && (index = recommendList.length)
                 index -= 1
             } else {
                 //下一首
+                (index == recommendList.length - 1) && (index = -1)
                 index += 1
             }
+            //更新对应的下标
+            this.setData({
+                index
+            })
             let musicId = recommendList[index].id
             //将音乐ID回传给songDetail页面
-            PubSub.publish("musicId",musicId)
+            PubSub.publish("musicId", musicId)
         })
     },
 

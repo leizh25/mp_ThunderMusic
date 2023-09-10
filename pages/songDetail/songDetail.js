@@ -113,10 +113,15 @@ Page({
         //获取切歌的类型
         let type = e.currentTarget.id
         // console.log('type: ', type);
+        //关闭当前音乐的播放
+        this.backgroundAudioManager.stop()
         //订阅来自recommendSong页面发布的musicId消息
         PubSub.subscribe("musicId",(msg,musicId)=>{
             console.log('musicId: ', musicId);
-
+            //获取音乐的详情信息
+            this.getMusicInfo(musicId)
+            //自动播放当前音乐
+            this.musicControl(true,musicId)
             //取消订阅
             PubSub.unsubscribe("musicId")
         })
