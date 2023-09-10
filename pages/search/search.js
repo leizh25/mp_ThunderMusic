@@ -1,5 +1,6 @@
 // pages/search/search.js
 import request from "../../utils/request"
+let isSend = false //函数节流使用
 Page({
 
     /**
@@ -8,6 +9,8 @@ Page({
     data: {
         placeholderContent: "", //placeholder的内容
         hotList: [], //热搜榜数据
+        searchContent: "", //用户输入的表单项数据
+        searchList: [], //关键字模糊匹配的数据
     },
 
     /**
@@ -28,6 +31,36 @@ Page({
         })
 
     },
+    //表单项内容发生改变的回调
+    handleInputChange(e) {
+        // console.log(e);
+        //更新searchContent的状态数据
+        this.setData({
+            searchContent: e.detail.value.trim()
+        })
+        //函数节流
+        if (isSend) return
+        isSend = true
+        this.getSearchList()
+        setTimeout(() => {
+
+            isSend = false
+        }, 300);
+    },
+    //获取搜索数据的功能函数
+    async getSearchList() {
+        //发请求 获取关键字模糊匹配数据
+        let searchListData = await request("/search", {
+            keywords: this.data.searchContent,
+            limit: 10
+        })
+        console.log('searchListData: ', searchListData);
+        this.setData({
+            searchList: searchListData.result.songs
+        })
+    },
+
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
