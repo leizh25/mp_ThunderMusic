@@ -73,6 +73,16 @@ Page({
                 currentWidth
             })
         })
+        //监听音乐播放自然结束
+        this.backgroundAudioManager.onEnded(() => {
+            //自动切换至下一首音乐,并且自动播放
+            PubSub.publish("switchType", "next")
+            //实时进度条的长度还原成0  实时播放时间还原成0 
+            this.setData({
+                currentWidth: 0,
+                currentTime: "00:00"
+            })
+        })
 
 
     },
@@ -143,7 +153,7 @@ Page({
         this.backgroundAudioManager.stop()
         //订阅来自recommendSong页面发布的musicId消息
         PubSub.subscribe("musicId", (msg, musicId) => {
-            console.log('musicId: ', musicId);
+            // console.log('musicId: ', musicId);
             //获取音乐的详情信息
             this.getMusicInfo(musicId)
             //自动播放当前音乐
