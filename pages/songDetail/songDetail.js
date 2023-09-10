@@ -12,6 +12,7 @@ Page({
         isPlay: false, //标识音乐是否播放
         song: {}, //歌曲详情对象
         musicId: "", //音乐ID
+        musicLink: "", //音乐链接
     },
 
     /**
@@ -56,7 +57,7 @@ Page({
             //修改音乐是否播放的状态
             this.changePlayState(false)
         })
-        
+
 
     },
     //修改播放状态的功能函数
@@ -73,9 +74,10 @@ Page({
         let isPlay = !this.data.isPlay
 
         let {
-            musicId
+            musicId,
+            musicLink
         } = this.data
-        this.musicControl(isPlay, musicId)
+        this.musicControl(isPlay, musicId, musicLink)
     },
     //获取音乐详情的功能函数
     async getMusicInfo(ids) {
@@ -92,14 +94,19 @@ Page({
         })
     },
     //控制音乐播放 / 暂停的功能函数
-    async musicControl(isPlay, musicId) {
+    async musicControl(isPlay, musicId, musicLink) {
 
         if (isPlay) { //音乐播放
-            //获取音乐播放链接
-            let musicLinkData = await request("/song/url", {
-                id: musicId
-            })
-            let musicLink = musicLinkData.data[0].url
+            if (!musicLink) {
+                //获取音乐播放链接
+                let musicLinkData = await request("/song/url", {
+                    id: musicId
+                })
+                musicLink = musicLinkData.data[0].url
+                this.setData({
+                    musicLink
+                })
+            }
 
             this.backgroundAudioManager.src = musicLink
             this.backgroundAudioManager.title = this.data.song.name
@@ -116,12 +123,12 @@ Page({
         //关闭当前音乐的播放
         this.backgroundAudioManager.stop()
         //订阅来自recommendSong页面发布的musicId消息
-        PubSub.subscribe("musicId",(msg,musicId)=>{
+        PubSub.subscribe("musicId", (msg, musicId) => {
             console.log('musicId: ', musicId);
             //获取音乐的详情信息
             this.getMusicInfo(musicId)
             //自动播放当前音乐
-            this.musicControl(true,musicId)
+            this.musicControl(true, musicId)
             //取消订阅
             PubSub.unsubscribe("musicId")
         })
