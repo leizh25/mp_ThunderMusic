@@ -60,6 +60,16 @@ Page({
             //修改音乐是否播放的状态
             this.changePlayState(false)
         })
+        //监听音乐实时播放的进度
+        this.backgroundAudioManager.onTimeUpdate(() => {
+            // console.log("总时长", this.backgroundAudioManager.duration);
+            console.log("实时时长", this.backgroundAudioManager.currentTime);
+            //格式化实时播放时间
+            let currentTime = moment(this.backgroundAudioManager.currentTime * 1000).format("mm:ss")
+            this.setData({
+                currentTime
+            })
+        })
 
 
     },
