@@ -93,9 +93,39 @@ Page({
     clearSearchContent() {
         // console.log("clear");
         this.setData({
-            searchContent:"",
-            searchList:[],
+            searchContent: "",
+            searchList: [],
         })
+    },
+    //删除搜索历史记录
+    deleteSearchHistory() {
+        wx.showModal({
+            title: 'ARE YOU OK?',
+            content: '确认删除吗?',
+            success: res => {
+                // console.log(res);
+                if (res.confirm) {
+                    //清空Data中historyList
+                    this.setData({
+                        historyList: []
+                    })
+                    //移除本地的历史记录缓存
+                    wx.removeStorageSync('searchHistory')
+                    wx.showToast({
+                      title: '删除成功',
+                      icon:"none"
+                    })
+                }else{
+                    wx.showToast({
+                      title: '取消删除',
+                      icon:"none"
+                    })
+                }
+            },
+
+        })
+
+
     },
 
 
