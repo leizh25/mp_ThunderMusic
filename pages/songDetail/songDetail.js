@@ -1,6 +1,7 @@
 // pages/songDetail/songDetail.js
 import request from "../../utils/request"
 import PubSub from "pubsub-js"
+import moment from "moment"
 //获取全局的实例
 let appInstance = getApp()
 Page({
@@ -13,6 +14,8 @@ Page({
         song: {}, //歌曲详情对象
         musicId: "", //音乐ID
         musicLink: "", //音乐链接
+        currentTime: "00:00", //实时时间
+        durationTime: "00:00", //总时长
     },
 
     /**
@@ -85,8 +88,11 @@ Page({
             ids
         })
         // console.log('songData: ', songData.songs[0]);
+        //songData.songs[0].dt  //单位 ms
+        let durationTime = moment(songData.songs[0].dt).format("mm:ss")
         this.setData({
-            song: songData.songs[0]
+            song: songData.songs[0],
+            durationTime
         })
         //动态修改窗口标题
         wx.setNavigationBarTitle({
