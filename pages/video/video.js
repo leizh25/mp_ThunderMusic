@@ -129,6 +129,12 @@ Page({
             })
         })
     },
+    //跳转到搜索页面
+    toSearch() {
+        wx.navigateTo({
+            url: '/pages/search/search',
+        })
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -175,7 +181,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage({from}) {
+    onShareAppMessage({
+        from
+    }) {
         console.log('from: ', from);
         if (from == "button") {
             return {

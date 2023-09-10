@@ -52,7 +52,7 @@ Page({
         this.getSearchList()
         setTimeout(() => {
             isSend = false
-        }, 300);
+        }, 600);
     },
     //获取搜索数据的功能函数
     async getSearchList() {
@@ -112,13 +112,13 @@ Page({
                     //移除本地的历史记录缓存
                     wx.removeStorageSync('searchHistory')
                     wx.showToast({
-                      title: '删除成功',
-                      icon:"none"
+                        title: '删除成功',
+                        icon: "none"
                     })
-                }else{
+                } else {
                     wx.showToast({
-                      title: '取消删除',
-                      icon:"none"
+                        title: '取消删除',
+                        icon: "none"
                     })
                 }
             },
@@ -126,6 +126,10 @@ Page({
         })
 
 
+    },
+    //返回上一级页面
+    toBack() {
+        wx.navigateBack()
     },
 
 
