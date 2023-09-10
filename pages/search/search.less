@@ -49,12 +49,43 @@
                 height: 80rpx;
                 line-height: 80rpx;
                 display: flex;
-                .content{
+
+                .content {
                     flex: 1;
                     margin-left: 20rpx;
                     border-bottom: 1rpx solid #eee;
                 }
             }
+        }
+    }
+
+    //搜索历史
+    .history {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        line-height: 50rpx;
+        margin: 10px 0;
+
+        .title {
+            font-size: 28rpx;
+            height: 50rpx;
+        }
+
+        .historyItem {
+            height: 50rpx;
+            font-size: 26rpx;
+            background-color: #eee;
+            margin-left: 20rpx;
+            padding: 0 15rpx;
+            border-radius: 8rpx;
+            margin-bottom: 20rpx;
+        }
+        .delete{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            font-size: 36rpx;
         }
     }
 
