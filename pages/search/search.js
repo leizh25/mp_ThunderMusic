@@ -38,17 +38,22 @@ Page({
         this.setData({
             searchContent: e.detail.value.trim()
         })
+        if(!this.data.searchContent) {
+            this.setData({
+                searchList:[]
+            })
+        }
         //函数节流
         if (isSend) return
         isSend = true
         this.getSearchList()
         setTimeout(() => {
-
             isSend = false
         }, 300);
     },
     //获取搜索数据的功能函数
     async getSearchList() {
+        if (!this.data.searchContent) return
         //发请求 获取关键字模糊匹配数据
         let searchListData = await request("/search", {
             keywords: this.data.searchContent,
