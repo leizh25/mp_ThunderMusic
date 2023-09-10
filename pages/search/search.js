@@ -11,6 +11,7 @@ Page({
         hotList: [], //热搜榜数据
         searchContent: "", //用户输入的表单项数据
         searchList: [], //关键字模糊匹配的数据
+        historyList: [], //搜索历史记录
     },
 
     /**
@@ -19,6 +20,8 @@ Page({
     onLoad(options) {
         //获取初始化数据
         this.getInitData()
+        //获取历史记录
+        this.getSearchHistory()
     },
     //获取初始化的数据
     async getInitData() {
@@ -38,9 +41,9 @@ Page({
         this.setData({
             searchContent: e.detail.value.trim()
         })
-        if(!this.data.searchContent) {
+        if (!this.data.searchContent) {
             this.setData({
-                searchList:[]
+                searchList: []
             })
         }
         //函数节流
@@ -54,14 +57,44 @@ Page({
     //获取搜索数据的功能函数
     async getSearchList() {
         if (!this.data.searchContent) return
+        let {
+            searchContent,
+            historyList
+        } = this.data
         //发请求 获取关键字模糊匹配数据
         let searchListData = await request("/search", {
             keywords: this.data.searchContent,
             limit: 10
         })
-        console.log('searchListData: ', searchListData);
+        // console.log('searchListData: ', searchListData);
         this.setData({
             searchList: searchListData.result.songs
+        })
+        //将搜索的关键字添加到搜索历史记录中
+        if (historyList.indexOf(searchContent) !== -1) {
+            historyList.splice(historyList.indexOf(searchContent), 1)
+        }
+        historyList.unshift(searchContent)
+        this.setData({
+            historyList
+        })
+        wx.setStorageSync('searchHistory', historyList)
+    },
+    //获取本地历史记录的功能函数
+    getSearchHistory() {
+        let historyList = wx.getStorageSync('searchHistory')
+        if (historyList) {
+            this.setData({
+                historyList
+            })
+        }
+    },
+    //清空搜索内容
+    clearSearchContent() {
+        // console.log("clear");
+        this.setData({
+            searchContent:"",
+            searchList:[],
         })
     },
 

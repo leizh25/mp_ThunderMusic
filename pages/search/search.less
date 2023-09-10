@@ -9,13 +9,14 @@
 
 
         .searchInput {
+            position: relative;
             flex: 1;
             background-color: #eee;
             border-radius: 15rpx;
 
             .searchIcon {
                 position: absolute;
-                left: 30rpx;
+                left: 15rpx;
             }
 
             input {
@@ -25,6 +26,13 @@
 
             .placeholder {
                 color: #acadc4;
+            }
+            .clear{
+                position: absolute;
+                top: 0;
+                right: 30rpx;
+                font-size: 30rpx;
+                z-index: 10;
             }
         }
 
