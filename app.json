@@ -5,7 +5,8 @@
         "pages/personal/personal",
         "pages/login/login",
         "pages/recommendSong/recommendSong",
-        "pages/songDetail/songDetail"
+        "pages/songDetail/songDetail",
+        "pages/search/search"
     ],
     "style": "v2",
     "sitemapLocation": "sitemap.json",
